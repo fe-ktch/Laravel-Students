@@ -34,7 +34,12 @@ SELECT * FROM students WHERE id =  AND email = "valami@teszt.hu"
 */
 public function listStudent() {
 
-    $students = DB::table('students')->where( "id", "=", 9)->get();
+    $students = DB::table('students')->where( "id", "=", 9)
+    ->where(function ( $query ) {
+
+        $query->where("name", "Orlando Veum")->orWhere("email", "pgrady@braun.org");
+
+    })->get();
 
     echo"<pre>";
     print_r( $students );
